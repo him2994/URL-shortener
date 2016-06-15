@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+&nbsp
+&nbsp
+<div class="ui container segment" >
+	&nbsp &nbsp &nbsp &nbsp
+	<div class="ui center aligned grid">
+		&nbsp
+		<div class="ui sizer center vertical segment">
+			<div class="ui huge header">URL Shortener</div>
+			<p>Welcome, make your url shorter </p>
+		</div><br><br>
+		&nbsp
+		<div class="row">
+			<form class="ui form" name="form" action='' method='POST'>
+					<center>
+						<div class="field">
+						{% if url.status == 'Success' %}
+							<div class="ui labeled input">
+							  <div class="ui label">
+							    Url : 
+							  </div>
+							  <input name="url type="text" placeholder="mysite.com" value="{{url.furl}}">
+							</div>
+						{% else %}
+							<div class="ui labeled input">
+							  <div class="ui label">
+							    Url : 
+							  </div>
+							  <input type="text" placeholder="mysite.com" name="url">
+							</div>
+						{% endif %}
+						</div>
+						<button type='submit' class="ui button">Shorten URL</button>
+					</center>
+				</div>
+			</form>
+		</div>
+		&nbsp &nbsp &nbsp &nbsp 
+		{% if url.status == 'Success' %}
+		<div>
+			<center>
+				{% if url %}
+				<h4>{{url.baseurl}}{{url.surl}}</h4>
+				{% endif %}
+			</center>
+		</div>
+		{% endif %}
+	</div>	
+</div>
+{% endblock %}
+
+{% block script %}
+
+	{% if url.status == 'Failed' %}
+		<script type="text/javascript">
+			alert("{{url.message}}");
+		</script>
+	{% endif %}
+
+{% endblock %}
+
